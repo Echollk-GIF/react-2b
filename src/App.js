@@ -1,9 +1,8 @@
 import IndexRouter from "./router/IndexRouter"
+import 'antd/dist/reset.css'
 function App () {
   return (
-    <div>
-      <IndexRouter />
-    </div>
+    <IndexRouter />
   )
 }
 

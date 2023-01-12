@@ -1,10 +1,28 @@
 import React, { useState } from 'react'
-import { Layout, theme } from 'antd'
+import { Layout, theme, Dropdown, Space, Avatar } from 'antd'
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  UserOutlined
 } from '@ant-design/icons'
 const { Header } = Layout
+
+const items = [
+  {
+    key: '1',
+    label: (
+      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+        超级管理员
+      </a>
+    ),
+  },
+  {
+    key: '2',
+    danger: true,
+    label: '退出登录',
+  },
+]
+
 export default function TopHeader () {
   const [collapsed, setCollapsed] = useState(false)
   const {
@@ -13,14 +31,29 @@ export default function TopHeader () {
   return (
     <Header
       style={{
-        padding: 0,
+        padding: '0 16px',
         background: colorBgContainer,
       }}
     >
-      {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-        className: 'trigger',
-        onClick: () => setCollapsed(!collapsed),
-      })}
+      {
+        collapsed ?
+          <MenuUnfoldOutlined onClick={() => { setCollapsed(!collapsed) }} />
+          : <MenuFoldOutlined onClick={() => { setCollapsed(!collapsed) }} />
+      }
+      <div style={{ float: 'right' }}>
+        <span>欢迎admin回来</span>
+        <Dropdown
+          menu={{
+            items,
+          }}
+        >
+          <a href='http://www.baidu.com' onClick={(e) => e.preventDefault()}>
+            <Space>
+              <Avatar size="large" icon={<UserOutlined />} />
+            </Space>
+          </a>
+        </Dropdown>
+      </div>
     </Header>
   )
 }
