@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import {
   FormOutlined,
@@ -16,6 +16,9 @@ const { Sider } = Layout
 
 export default function SideMenu () {
   const navigate = useNavigate()
+  const location = useLocation()
+  const selectKeys = [location.pathname]
+  const openKeys = ["/" + location.pathname.split("/")[1]]
   const [menu, setMenu] = useState([])
   const [collapsed, setCollapsed] = useState(false)
 
@@ -61,7 +64,8 @@ export default function SideMenu () {
           <Menu
             theme="dark"
             mode="inline"
-            defaultSelectedKeys={['/home']}
+            selectedKeys={selectKeys}
+            defaultOpenKeys={openKeys}
             items={menu}
             onSelect={(e) => { navigate(e.key) }}
           />
