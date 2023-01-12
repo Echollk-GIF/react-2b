@@ -14,13 +14,15 @@ import './index.css'
 import { getSideMenu } from '../../api/user'
 const { Sider } = Layout
 
-export default function SideMenu () {
+export default function SideMenu (props) {
   const navigate = useNavigate()
   const location = useLocation()
+
+  const { collapsed } = props
+
   const selectKeys = [location.pathname]
   const openKeys = ["/" + location.pathname.split("/")[1]]
   const [menu, setMenu] = useState([])
-  const [collapsed, setCollapsed] = useState(false)
 
   const [iconList] = useState({
     "/home": <HomeOutlined />,

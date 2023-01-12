@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Layout, theme, Dropdown, Space, Avatar } from 'antd'
 import {
   MenuFoldOutlined,
@@ -23,8 +23,8 @@ const items = [
   },
 ]
 
-export default function TopHeader () {
-  const [collapsed, setCollapsed] = useState(false)
+export default function TopHeader (props) {
+  const { collapsed, setCollapsed } = props
   const {
     token: { colorBgContainer },
   } = theme.useToken()
