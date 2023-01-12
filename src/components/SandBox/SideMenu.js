@@ -12,9 +12,27 @@ export default function SideMenu () {
   const [menu, setMenu] = useState([])
   const [collapsed, setCollapsed] = useState(false)
 
+  const createSideMenu = (menuList) => {
+    return menuList.map((item) => {
+      // 移除空children节点
+      if (item.children.length === 0) {
+        delete item["children"]
+      }
+      // 移除无pagepermission权限节点
+      if (item.children !== undefined) {
+        for (let i = 0; i < item.children.length; i++) {
+          if (item.children[i].pagepermission === undefined || item.children[i].pagepermission === 0 || item.children[i].pagepermission !== 1) {
+            delete item.children[i]
+          }
+        }
+      }
+      return item
+    })
+  }
   useEffect(() => {
     getSideMenu().then((res) => {
-      setMenu(res.data)
+      //对返回的数据进行page权限判断（是否显示和是否有权限显示）
+      setMenu(createSideMenu(res.data))
     })
   }, [])
   return (
