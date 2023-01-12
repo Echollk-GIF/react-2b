@@ -49,7 +49,7 @@ export default function TopHeader () {
         >
           <a href='http://www.baidu.com' onClick={(e) => e.preventDefault()}>
             <Space>
-              <Avatar size="large" icon={<UserOutlined />} />
+              <Avatar size="default" icon={<UserOutlined />} />
             </Space>
           </a>
         </Dropdown>
