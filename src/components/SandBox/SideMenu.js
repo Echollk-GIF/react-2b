@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
-
+import {
+  FormOutlined,
+  HomeOutlined,
+  UserOutlined,
+  InfoCircleOutlined,
+  AuditOutlined,
+  BarChartOutlined
+} from "@ant-design/icons"
 import './index.css'
 
 import { getSideMenu } from '../../api/user'
@@ -12,8 +19,18 @@ export default function SideMenu () {
   const [menu, setMenu] = useState([])
   const [collapsed, setCollapsed] = useState(false)
 
+  const [iconList] = useState({
+    "/home": <HomeOutlined />,
+    "/user-manage": <UserOutlined />,
+    "/right-manage": <FormOutlined />,
+    "/news-manage": <InfoCircleOutlined />,
+    "/audit-manage": <AuditOutlined />,
+    "/publish-manage": <BarChartOutlined />
+  })
+
   const createSideMenu = (menuList) => {
     return menuList.map((item) => {
+      item.icon = iconList[item.key]
       // 移除空children节点
       if (item.children.length === 0) {
         delete item["children"]
@@ -34,17 +51,22 @@ export default function SideMenu () {
       //对返回的数据进行page权限判断（是否显示和是否有权限显示）
       setMenu(createSideMenu(res.data))
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
-      <div className="logo" >LOGO</div>
-      <Menu
-        theme="dark"
-        mode="inline"
-        defaultSelectedKeys={['/home']}
-        items={menu}
-        onSelect={(e) => { navigate(e.key) }}
-      />
+      <div style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
+        <div className="logo" >LOGO</div>
+        <div style={{ flex: 1, overflow: 'auto' }}>
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={['/home']}
+            items={menu}
+            onSelect={(e) => { navigate(e.key) }}
+          />
+        </div>
+      </div>
     </Sider>
   )
 }
