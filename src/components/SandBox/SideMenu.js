@@ -37,7 +37,7 @@ export default function SideMenu (props) {
     return menuList.map((item) => {
       item.icon = iconList[item.key]
       // 移除空children节点
-      if (item.children.length === 0) {
+      if (item.children && item.children.length === 0) {
         delete item["children"]
       }
       // 移除无pagepermission权限节点
