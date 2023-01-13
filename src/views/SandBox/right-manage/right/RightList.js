@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Tag, Button, Modal } from 'antd'
+import { Table, Tag, Button, Modal, Popover, Switch } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 import {
   getPermissionList,
-  deletePermissionById
+  deletePermissionById,
+  updatePermissionById
 } from '../../../../api/user'
+import { mockGetPermissionList } from '../../../../api/mock/mock'
 const { confirm } = Modal
 export default function RightList () {
   const [dataSource, setDataSource] = useState([])
@@ -20,13 +22,23 @@ export default function RightList () {
         deletePermissionById(item.id).then((res) => {
           console.log(res)
         })
-        getPermissionList().then((res) => {
+        mockGetPermissionList(item.id, 'delete').then((res) => {
           setDataSource(res.data)
         })
       },
       onCancel () {
         console.log('Cancel')
       },
+    })
+  }
+
+  //页面配置状态改变
+  const handleSwitchChange = (item) => {
+    updatePermissionById(item.id).then((res) => {
+      console.log(res)
+    })
+    mockGetPermissionList(item.id, 'update').then((res) => {
+      setDataSource(res.data)
     })
   }
 
@@ -60,7 +72,21 @@ export default function RightList () {
       align: 'center',
       render: (item) => {
         return <div>
-          <Button type='primary' style={{ marginRight: '20px' }}>编辑</Button>
+          <Popover
+            title="页面配置"
+            content={
+              <div style={{ textAlign: 'center' }}>
+                <Switch
+                  checked={item.pagepermission}
+                  onChange={() => { handleSwitchChange(item) }} />
+              </div>
+            }
+            trigger={item.pagepermission === undefined ? '' : 'click'}>
+            <Button
+              type='primary'
+              style={{ marginRight: '20px' }}
+              disabled={item.pagepermission === undefined}>编辑</Button>
+          </Popover>
           <Button danger onClick={() => { confirmDelete(item) }}>删除</Button>
         </div>
       }

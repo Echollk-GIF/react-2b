@@ -9,3 +9,8 @@ export function getPermissionList () {
 export function deletePermissionById (id) {
   return request.delete(`/api/user/deletePermissionById/${id}`)
 }
+
+//根据id更新权限
+export function updatePermissionById (id) {
+  return request.patch(`/api/user/updatePermissionById/${id}`)
+}
