@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons"
 import './index.css'
 
-import { getSideMenu } from '../../api/user'
+import { getPermissionList } from '../../api/user'
 const { Sider } = Layout
 
 export default function SideMenu (props) {
@@ -52,7 +52,7 @@ export default function SideMenu (props) {
     })
   }
   useEffect(() => {
-    getSideMenu().then((res) => {
+    getPermissionList().then((res) => {
       //对返回的数据进行page权限判断（是否显示和是否有权限显示）
       setMenu(createSideMenu(res.data))
     })
