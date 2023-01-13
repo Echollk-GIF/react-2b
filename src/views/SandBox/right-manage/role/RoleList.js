@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Button, Modal } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
-import { getRoleList } from '../../../../api/role'
+import {
+  getRoleList,
+  deleteRoleById
+} from '../../../../api/role'
+import { mockDeleteRoleById } from '../../../../api/mock/mock'
 const { confirm } = Modal
 
 export default function RoleList () {
@@ -15,6 +19,12 @@ export default function RoleList () {
       content: '',
       okType: 'danger',
       onOk () {
+        deleteRoleById(item.id).then((res) => {
+          console.log(res)
+        })
+        mockDeleteRoleById(item.id, 'delete').then((res) => {
+          setDataSource(res.data)
+        })
       },
       onCancel () {
         console.log('Cancel')
