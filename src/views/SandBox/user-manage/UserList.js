@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Button, Modal, Switch, Form, Input, Select } from 'antd'
+import { Table, Button, Modal, Switch } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 import { getUserList } from '../../../api/user'
-
 import { getBatchSelesctList } from '../../../api/global'
+import UserFormModal from './componens/UserFormModal'
 const { confirm } = Modal
 export default function UserList () {
   const [dataSource, setDataSource] = useState([])
   const [isAddOpen, setIsAddOpen] = useState(false)
   const [roleSelectList, setRoleSelectList] = useState([])
-  const [form] = Form.useForm()
   //确认删除(Modal)
   const confirmDelete = (item) => {
     confirm({
@@ -24,11 +23,6 @@ export default function UserList () {
         console.log('Cancel')
       },
     })
-  }
-
-  //用户状态改变
-  const handleSwitchChange = (item) => {
-
   }
 
   const columns = [
@@ -114,75 +108,10 @@ export default function UserList () {
           pageSizeOptions: [5, 10],
           defaultPageSize: 5
         }} />
-
-      <Modal
-        open={isAddOpen}
-        title="添加用户"
-        okText="确定"
-        cancelText="取消"
-        onCancel={() => { setIsAddOpen(false) }}
-        onOk={() => {
-          // form
-          //   .validateFields()
-          //   .then((values) => {
-          //     form.resetFields()
-          //     onCreate(values)
-          //   })
-          //   .catch((info) => {
-          //     console.log('Validate Failed:', info)
-          //   })
-        }}
-      >
-        <Form
-          form={form}
-          // layout="vertical"
-          name="form_in_modal"
-          initialValues={{
-            modifier: 'public',
-          }}
-        >
-          <Form.Item
-            name="username"
-            label="用户名"
-            rules={[
-              {
-                required: true,
-                message: '请输入用户名!',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            label="用户名"
-            rules={[
-              {
-                required: true,
-                message: '请输入密码!',
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            name="roleId"
-            label="角色"
-            rules={[
-              {
-                required: true,
-                message: '请选择角色!',
-              },
-            ]}
-          >
-            <Select>
-              {roleSelectList.map((item) => {
-                return <Select.Option value={item.value} key={item.value}>{item.label}</Select.Option>
-              })}
-            </Select>
-          </Form.Item>
-        </Form>
-      </Modal>
+      <UserFormModal
+        isAddOpen={isAddOpen}
+        setIsAddOpen={setIsAddOpen}
+        roleSelectList={roleSelectList} />
     </div>
   )
 }
