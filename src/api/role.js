@@ -9,3 +9,10 @@ export function getRoleList () {
 export function deleteRoleById (id) {
   return request.delete(`/api/deleteRoleById/${id}`)
 }
+
+//修改角色权限
+export function updateRolePermission (id, permissionList) {
+  return request.patch(`/api/updateRolePermission/${id}`, {
+    permissionList: permissionList
+  })
+}

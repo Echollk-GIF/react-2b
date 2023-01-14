@@ -1,28 +1,40 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Button, Modal } from 'antd'
+import { Table, Button, Modal, Tree } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 import {
   getRoleList,
-  deleteRoleById
+  deleteRoleById,
+  updateRolePermission
 } from '../../../../api/role'
 import { getPermissionList } from '../../../../api/user'
 import { mockDeleteRoleById } from '../../../../api/mock/mock'
 const { confirm } = Modal
 
 export default function RoleList () {
-  const [dataSource, setDataSource] = useState([])
+  //角色列表
+  const [roleList, setRoleList] = useState([])
+  //编辑Modal显示/隐藏
   const [isModalOpen, setIsModalOpen] = useState(false)
+  //权限列表
   const [permissionList, setPermissionList] = useState([])
+  //当前点击的角色的权限列表
+  const [currentId, setCurrentId] = useState(0)
+  const [currentRights, setCurrentRights] = useState([])
 
   //编辑Modal
-  const showModal = () => {
-    setIsModalOpen(true)
-  }
   const handleOk = () => {
     setIsModalOpen(false)
+    updateRolePermission(currentId, currentRights).then((res) => {
+      console.log(res)
+    })
   }
   const handleCancel = () => {
     setIsModalOpen(false)
+  }
+
+  //编辑Tree
+  const onCheck = (checkedKeys) => {
+    setCurrentRights(checkedKeys.checked)
   }
 
   //确认删除(Modal)
@@ -37,7 +49,7 @@ export default function RoleList () {
           console.log(res)
         })
         mockDeleteRoleById(item.id, 'delete').then((res) => {
-          setDataSource(res.data)
+          setRoleList(res.data)
         })
       },
       onCancel () {
@@ -70,7 +82,11 @@ export default function RoleList () {
           <Button
             type='primary'
             style={{ marginRight: '20px' }}
-            onClick={showModal}
+            onClick={() => {
+              setIsModalOpen(true)
+              setCurrentRights(item.rights)
+              setCurrentId(item.id)
+            }}
           >编辑</Button>
           <Button danger onClick={() => { confirmDelete(item) }}>删除</Button>
         </div>
@@ -79,7 +95,7 @@ export default function RoleList () {
   ]
   useEffect(() => {
     getRoleList().then((res) => {
-      setDataSource(res.data)
+      setRoleList(res.data)
     })
     getPermissionList().then((res) => {
       setPermissionList(res.data)
@@ -88,7 +104,7 @@ export default function RoleList () {
   return (
     <div>
       <Table
-        dataSource={dataSource}
+        dataSource={roleList}
         columns={columns}
         rowKey={(item) => item.id}
         pagination={{
@@ -98,9 +114,13 @@ export default function RoleList () {
           defaultPageSize: 5
         }} />
       <Modal title="权限分配" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <Tree
+          checkable
+          checkStrictly
+          checkedKeys={currentRights}
+          onCheck={onCheck}
+          treeData={permissionList}
+        />
       </Modal>
     </div>
   )
