@@ -19,3 +19,8 @@ export function updatePermissionById (id) {
 export function getUserList () {
   return request.get('/api/userList')
 }
+
+//新增用户
+export function addUser (values) {
+  return request.post('/api/addUser', { ...values })
+}

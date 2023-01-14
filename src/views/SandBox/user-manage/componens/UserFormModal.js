@@ -1,8 +1,16 @@
 import React from 'react'
 import { Form, Input, Select, Modal } from 'antd'
+import { addUser } from '../../../../api/user'
 export default function UserFormModal (props) {
   const [form] = Form.useForm()
   const { isAddOpen, setIsAddOpen, roleSelectList } = props
+  const onCreate = (values) => {
+    console.log('Received values of form: ', values)
+    addUser(values).then((res) => {
+      console.log(res)
+    })
+    setIsAddOpen(false)
+  }
   return (
     <div>
       <Modal
@@ -12,15 +20,15 @@ export default function UserFormModal (props) {
         cancelText="取消"
         onCancel={() => { setIsAddOpen(false) }}
         onOk={() => {
-          // form
-          //   .validateFields()
-          //   .then((values) => {
-          //     form.resetFields()
-          //     onCreate(values)
-          //   })
-          //   .catch((info) => {
-          //     console.log('Validate Failed:', info)
-          //   })
+          form
+            .validateFields()
+            .then((values) => {
+              form.resetFields()
+              onCreate(values)
+            })
+            .catch((info) => {
+              console.log('Validate Failed:', info)
+            })
         }}
       >
         <Form
