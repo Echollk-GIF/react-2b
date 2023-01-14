@@ -54,8 +54,8 @@ export default function RightList () {
     },
     {
       title: '权限名称',
-      dataIndex: 'label',
-      key: 'label',
+      dataIndex: 'title',
+      key: 'title',
       align: 'center',
     },
     {

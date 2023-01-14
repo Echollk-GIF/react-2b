@@ -5,11 +5,25 @@ import {
   getRoleList,
   deleteRoleById
 } from '../../../../api/role'
+import { getPermissionList } from '../../../../api/user'
 import { mockDeleteRoleById } from '../../../../api/mock/mock'
 const { confirm } = Modal
 
 export default function RoleList () {
   const [dataSource, setDataSource] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [permissionList, setPermissionList] = useState([])
+
+  //编辑Modal
+  const showModal = () => {
+    setIsModalOpen(true)
+  }
+  const handleOk = () => {
+    setIsModalOpen(false)
+  }
+  const handleCancel = () => {
+    setIsModalOpen(false)
+  }
 
   //确认删除(Modal)
   const confirmDelete = (item) => {
@@ -56,6 +70,7 @@ export default function RoleList () {
           <Button
             type='primary'
             style={{ marginRight: '20px' }}
+            onClick={showModal}
           >编辑</Button>
           <Button danger onClick={() => { confirmDelete(item) }}>删除</Button>
         </div>
@@ -65,6 +80,9 @@ export default function RoleList () {
   useEffect(() => {
     getRoleList().then((res) => {
       setDataSource(res.data)
+    })
+    getPermissionList().then((res) => {
+      setPermissionList(res.data)
     })
   }, [])
   return (
@@ -79,6 +97,11 @@ export default function RoleList () {
           pageSizeOptions: [5, 10],
           defaultPageSize: 5
         }} />
+      <Modal title="权限分配" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Modal>
     </div>
   )
 }

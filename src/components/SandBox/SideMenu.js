@@ -36,6 +36,7 @@ export default function SideMenu (props) {
   const createSideMenu = (menuList) => {
     return menuList.map((item) => {
       item.icon = iconList[item.key]
+      item.label = item.title
       // 移除空children节点
       if (item.children && item.children.length === 0) {
         delete item["children"]
@@ -43,10 +44,12 @@ export default function SideMenu (props) {
       // 移除无pagepermission权限节点
       if (item.children !== undefined) {
         for (let i = 0; i < item.children.length; i++) {
-          if (item.children[i].pagepermission === undefined || item.children[i].pagepermission === 0 || item.children[i].pagepermission !== 1) {
+          if (item.children[i].pagepermission === undefined || item.children[i].pagepermission !== 1) {
             delete item.children[i]
           }
         }
+        //递归处理
+        createSideMenu(item.children)
       }
       return item
     })
