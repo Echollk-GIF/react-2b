@@ -56,8 +56,8 @@ export default function UserList () {
       title: '用户状态',
       dataIndex: 'userStatus',
       key: 'userStatus',
-      render: (userStatus) => {
-        return <Switch></Switch>
+      render: (userStatus, item) => {
+        return <Switch checked={userStatus} disabled={item.default}></Switch>
       },
       align: 'center'
     },
@@ -68,8 +68,12 @@ export default function UserList () {
         return <div>
           <Button
             type='primary'
-            style={{ marginRight: '20px' }}>编辑</Button>
-          <Button danger onClick={() => { confirmDelete(item) }}>删除</Button>
+            style={{ marginRight: '20px' }}
+            disabled={item.default}>编辑</Button>
+          <Button
+            danger
+            disabled={item.default}
+            onClick={() => { confirmDelete(item) }}>删除</Button>
         </div>
       }
     }
