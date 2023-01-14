@@ -14,3 +14,8 @@ export function deletePermissionById (id) {
 export function updatePermissionById (id) {
   return request.patch(`/api/user/updatePermissionById/${id}`)
 }
+
+//获取用户列表
+export function getUserList () {
+  return request.get('/api/userList')
+}
