@@ -1,3 +1,5 @@
+//注意：
+//1.删除权限等mock接口因json-server格式原因暂时设置为只支持删除第一层，但实际开发中根据id删除权限不影响
 {
   "permissionList": [
     {
@@ -494,62 +496,6 @@
           "/publish-manage/sunset"
         ]
       }
-    },
-    {
-      "username": "test2",
-      "password": "123456",
-      "roleId": 3,
-      "userStatus": true,
-      "default": false,
-      "role": {
-        "id": 3,
-        "roleName": "区域编辑",
-        "roleType": 3,
-        "rights": [
-          "/home",
-          "/news-manage",
-          "/news-manage/list",
-          "/news-manage/add",
-          "/news-manage/update/:id",
-          "/news-manage/preview/:id",
-          "/news-manage/draft",
-          "/audit-manage",
-          "/audit-manage/list",
-          "/publish-manage",
-          "/publish-manage/unpublished",
-          "/publish-manage/published",
-          "/publish-manage/sunset"
-        ]
-      },
-      "id": 11
-    },
-    {
-      "username": "test3",
-      "password": "123456",
-      "roleId": 3,
-      "userStatus": true,
-      "default": false,
-      "role": {
-        "id": 3,
-        "roleName": "区域编辑",
-        "roleType": 3,
-        "rights": [
-          "/home",
-          "/news-manage",
-          "/news-manage/list",
-          "/news-manage/add",
-          "/news-manage/update/:id",
-          "/news-manage/preview/:id",
-          "/news-manage/draft",
-          "/audit-manage",
-          "/audit-manage/list",
-          "/publish-manage",
-          "/publish-manage/unpublished",
-          "/publish-manage/published",
-          "/publish-manage/sunset"
-        ]
-      },
-      "id": 12
     }
   ],
   "roleList": [
@@ -589,7 +535,7 @@
     },
     {
       "id": 2,
-      "roleName": "普通管理员",
+      "roleName": "区域管理员",
       "roleType": 2,
       "rights": [
         "/home",
@@ -616,7 +562,7 @@
     },
     {
       "id": 3,
-      "roleName": "普通编辑",
+      "roleName": "区域编辑",
       "roleType": 3,
       "rights": [
         "/home",
@@ -633,20 +579,6 @@
         "/publish-manage/published",
         "/publish-manage/sunset"
       ]
-    }
-  ],
-  "roleSelectList": [
-    {
-      "label": "超级管理员",
-      "value": 1
-    },
-    {
-      "label": "普通管理员",
-      "value": 2
-    },
-    {
-      "label": "普通编辑",
-      "value": 3
     }
   ]
 }

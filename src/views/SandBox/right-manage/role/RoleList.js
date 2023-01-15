@@ -6,8 +6,8 @@ import {
   deleteRoleById,
   updateRolePermission
 } from '../../../../api/role'
-import { getPermissionList } from '../../../../api/user'
-import { mockDeleteRoleById } from '../../../../api/mock/mock'
+import { getPermissionList } from '../../../../api/right'
+
 const { confirm } = Modal
 
 export default function RoleList () {
@@ -24,8 +24,10 @@ export default function RoleList () {
   //编辑Modal
   const handleOk = () => {
     setIsModalOpen(false)
-    updateRolePermission(currentId, currentRights).then((res) => {
-      console.log(res)
+    updateRolePermission(currentId, currentRights)
+    getRoleList().then((res) => {
+      // setRoleList(res.data)
+      setRoleList(res)
     })
   }
   const handleCancel = () => {
@@ -45,11 +47,10 @@ export default function RoleList () {
       content: '',
       okType: 'danger',
       onOk () {
-        deleteRoleById(item.id).then((res) => {
-          console.log(res)
-        })
-        mockDeleteRoleById(item.id, 'delete').then((res) => {
-          setRoleList(res.data)
+        deleteRoleById(item.id)
+        getRoleList().then((res) => {
+          // setRoleList(res.data)
+          setRoleList(res)
         })
       },
       onCancel () {
@@ -95,10 +96,12 @@ export default function RoleList () {
   ]
   useEffect(() => {
     getRoleList().then((res) => {
-      setRoleList(res.data)
+      // setRoleList(res.data)
+      setRoleList(res)
     })
     getPermissionList().then((res) => {
-      setPermissionList(res.data)
+      // setPermissionList(res.data)
+      setPermissionList(res)
     })
   }, [])
   return (

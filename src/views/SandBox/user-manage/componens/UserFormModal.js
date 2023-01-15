@@ -1,15 +1,15 @@
 import React from 'react'
 import { Form, Input, Select, Modal } from 'antd'
-import { addUser } from '../../../../api/user'
+import { addUser, getUserList } from '../../../../api/user'
 export default function UserFormModal (props) {
   const [form] = Form.useForm()
-  const { isAddOpen, setIsAddOpen, roleSelectList } = props
+  const { isAddOpen, setIsAddOpen, roleSelectList, setDataSource } = props
   const onCreate = (values) => {
-    console.log('Received values of form: ', values)
-    addUser(values).then((res) => {
-      console.log(res)
-    })
+    addUser(values)
     setIsAddOpen(false)
+    getUserList().then((res) => {
+      setDataSource(res)
+    })
   }
   return (
     <div>

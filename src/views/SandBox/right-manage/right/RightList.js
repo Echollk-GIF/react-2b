@@ -5,8 +5,7 @@ import {
   getPermissionList,
   deletePermissionById,
   updatePermissionById
-} from '../../../../api/user'
-import { mockGetPermissionList } from '../../../../api/mock/mock'
+} from '../../../../api/right'
 const { confirm } = Modal
 export default function RightList () {
   const [dataSource, setDataSource] = useState([])
@@ -19,11 +18,9 @@ export default function RightList () {
       content: '删除后将导致该权限不可用',
       okType: 'danger',
       onOk () {
-        deletePermissionById(item.id).then((res) => {
-          console.log(res)
-        })
-        mockGetPermissionList(item.id, 'delete').then((res) => {
-          setDataSource(res.data)
+        deletePermissionById(item.id)
+        getPermissionList().then((res) => {
+          setDataSource(res)
         })
       },
       onCancel () {
@@ -34,11 +31,10 @@ export default function RightList () {
 
   //页面配置状态改变
   const handleSwitchChange = (item) => {
-    updatePermissionById(item.id).then((res) => {
-      console.log(res)
-    })
-    mockGetPermissionList(item.id, 'update').then((res) => {
-      setDataSource(res.data)
+    let newPagePermission = !item.pagepermission === true ? 1 : 0
+    updatePermissionById(item.id, newPagePermission)
+    getPermissionList().then((res) => {
+      setDataSource(res)
     })
   }
 
@@ -95,7 +91,8 @@ export default function RightList () {
 
   useEffect(() => {
     getPermissionList().then((res) => {
-      setDataSource(res.data)
+      // setDataSource(res.data)
+      setDataSource(res)
     })
   }, [])
 

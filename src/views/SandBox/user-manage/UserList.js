@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Table, Button, Modal, Switch } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 import { getUserList } from '../../../api/user'
-import { getBatchSelesctList } from '../../../api/global'
+import { getRoleSelesctList } from '../../../api/global'
 import UserFormModal from './componens/UserFormModal'
 const { confirm } = Modal
 export default function UserList () {
@@ -79,16 +79,11 @@ export default function UserList () {
 
   useEffect(() => {
     getUserList().then((res) => {
-      setDataSource(res.data)
+      // setDataSource(res.data)
+      setDataSource(res)
     })
-    getBatchSelesctList('role').then((res) => {
-      let roleList = res.data.map((item) => {
-        let newObj = {}
-        newObj.label = item.roleName
-        newObj.value = item.roleType
-        return newObj
-      })
-      setRoleSelectList(roleList)
+    getRoleSelesctList().then((res) => {
+      setRoleSelectList(res)
     })
   }, [])
 
@@ -111,7 +106,8 @@ export default function UserList () {
       <UserFormModal
         isAddOpen={isAddOpen}
         setIsAddOpen={setIsAddOpen}
-        roleSelectList={roleSelectList} />
+        roleSelectList={roleSelectList}
+        setDataSource={setDataSource} />
     </div>
   )
 }

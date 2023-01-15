@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons"
 import './index.css'
 
-import { getPermissionList } from '../../api/user'
+import { getPermissionList } from '../../api/right'
 const { Sider } = Layout
 
 export default function SideMenu (props) {
