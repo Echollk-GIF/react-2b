@@ -99,6 +99,11 @@ export function addUser (values) {
   return request.post('/api/userList', newUser)
 }
 
+//根据id删除用户
+export function deleteUser (id) {
+  return request.delete(`/api/userList/${id}`)
+}
+
 
 
 

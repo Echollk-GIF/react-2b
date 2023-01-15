@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Button, Modal, Switch } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
-import { getUserList } from '../../../api/user'
+import {
+  getUserList,
+  deleteUser
+} from '../../../api/user'
 import { getRoleSelesctList } from '../../../api/global'
 import UserFormModal from './componens/UserFormModal'
 const { confirm } = Modal
@@ -17,7 +20,11 @@ export default function UserList () {
       content: '删除后将导致该用户不可用',
       okType: 'danger',
       onOk () {
-
+        deleteUser(item.id)
+        getUserList().then((res) => {
+          // setDataSource(res.data)
+          setDataSource(res)
+        })
       },
       onCancel () {
         console.log('Cancel')
