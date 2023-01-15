@@ -1,0 +1,168 @@
+{
+  "permissionList": [
+    {
+      "id": 1,
+      "title": "首页",
+      "key": "/home",
+      "pagepermission": 1
+    },
+    {
+      "id": 2,
+      "title": "用户管理",
+      "key": "/user-manage",
+      "pagepermission": 1,
+      "children": [
+        {
+          "id": 3,
+          "title": "添加用户",
+          "key": "/user-manage/add"
+        },
+        {
+          "id": 4,
+          "title": "删除用户",
+          "key": "/user-manage/delete"
+        },
+        {
+          "id": 5,
+          "title": "修改用户",
+          "key": "/user-manage/update"
+        },
+        {
+          "id": 6,
+          "title": "用户列表",
+          "key": "/user-manage/list",
+          "pagepermission": 1
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "权限管理",
+      "key": "/right-manage",
+      "pagepermission": 1,
+      "children": [
+        {
+          "id": 8,
+          "title": "角色列表",
+          "key": "/right-manage/role/list",
+          "pagepermission": 1
+        },
+        {
+          "id": 9,
+          "title": "权限列表",
+          "key": "/right-manage/right/list",
+          "pagepermission": 1
+        },
+        {
+          "id": 10,
+          "title": "修改角色",
+          "key": "/right-manage/role/update"
+        },
+        {
+          "id": 11,
+          "title": "删除角色",
+          "key": "/right-manage/role/delete"
+        },
+        {
+          "id": 12,
+          "title": "修改权限",
+          "key": "/right-manage/right/update"
+        },
+        {
+          "id": 13,
+          "title": "删除权限",
+          "key": "/right-manage/right/delete"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "新闻管理",
+      "key": "/news-manage",
+      "pagepermission": 1,
+      "children": [
+        {
+          "id": 15,
+          "title": "新闻列表",
+          "key": "/news-manage/list"
+        },
+        {
+          "id": 16,
+          "title": "撰写新闻",
+          "key": "/news-manage/add",
+          "pagepermission": 1
+        },
+        {
+          "id": 17,
+          "title": "新闻更新",
+          "key": "/news-manage/update/:id",
+          "routepermisson": 1
+        },
+        {
+          "id": 18,
+          "title": "新闻预览",
+          "key": "/news-manage/preview/:id",
+          "routepermisson": 1
+        },
+        {
+          "id": 19,
+          "title": "草稿箱",
+          "key": "/news-manage/draft",
+          "pagepermission": 1
+        },
+        {
+          "id": 20,
+          "title": "新闻分类",
+          "key": "/news-manage/category",
+          "pagepermission": 1
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "审核管理",
+      "key": "/audit-manage",
+      "pagepermission": 1,
+      "children": [
+        {
+          "id": 22,
+          "title": "审核新闻",
+          "key": "/audit-manage/audit",
+          "pagepermission": 1
+        },
+        {
+          "id": 23,
+          "title": "审核列表",
+          "key": "/audit-manage/list",
+          "pagepermission": 1
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "发布管理",
+      "key": "/publish-manage",
+      "pagepermission": 1,
+      "children": [
+        {
+          "id": 25,
+          "title": "待发布",
+          "key": "/publish-manage/unpublished",
+          "pagepermission": 1
+        },
+        {
+          "id": 26,
+          "title": "已发布",
+          "key": "/publish-manage/published",
+          "pagepermission": 1
+        },
+        {
+          "id": 27,
+          "title": "已下线",
+          "key": "/publish-manage/sunset",
+          "pagepermission": 1
+        }
+      ]
+    }
+  ]
+}

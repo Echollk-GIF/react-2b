@@ -57,7 +57,8 @@ export default function SideMenu (props) {
   useEffect(() => {
     getPermissionList().then((res) => {
       //对返回的数据进行page权限判断（是否显示和是否有权限显示）
-      setMenu(createSideMenu(res.data))
+      // setMenu(createSideMenu(res.data))
+      setMenu(createSideMenu(res))
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

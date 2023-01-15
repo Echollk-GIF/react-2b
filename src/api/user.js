@@ -1,9 +1,9 @@
 import request from "../utils/request"
 
 //获取用户权限列表
-export function getPermissionList () {
-  return request.get('/api/user/permissionList')
-}
+// export function getPermissionList () {
+//   return request.get('/api/user/permissionList')
+// }
 
 //根据id删除权限
 export function deletePermissionById (id) {
@@ -23,4 +23,9 @@ export function getUserList () {
 //新增用户
 export function addUser (values) {
   return request.post('/api/addUser', { ...values })
+}
+
+//获取用户permission权限列表
+export function getPermissionList () {
+  return request.get('/api/permissionList')
 }
