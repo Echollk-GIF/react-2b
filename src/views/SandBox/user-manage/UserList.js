@@ -3,7 +3,8 @@ import { Table, Button, Modal, Switch } from 'antd'
 import { ExclamationCircleFilled } from '@ant-design/icons'
 import {
   getUserList,
-  deleteUser
+  deleteUser,
+  updateUserStatus
 } from '../../../api/user'
 import { getRoleSelesctList } from '../../../api/global'
 import UserFormModal from './componens/UserFormModal'
@@ -29,6 +30,15 @@ export default function UserList () {
       onCancel () {
         console.log('Cancel')
       },
+    })
+  }
+
+  //用户状态Switch改变
+  const handleUserStatusChange = (item) => {
+    updateUserStatus(item.id, !item.userStatus)
+    getUserList().then((res) => {
+      // setDataSource(res.data)
+      setDataSource(res)
     })
   }
 
@@ -62,7 +72,10 @@ export default function UserList () {
       dataIndex: 'userStatus',
       key: 'userStatus',
       render: (userStatus, item) => {
-        return <Switch checked={userStatus} disabled={item.default}></Switch>
+        return <Switch
+          checked={userStatus}
+          disabled={item.default}
+          onChange={() => { handleUserStatusChange(item) }}></Switch>
       },
       align: 'center'
     },

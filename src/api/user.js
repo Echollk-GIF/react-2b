@@ -104,6 +104,13 @@ export function deleteUser (id) {
   return request.delete(`/api/userList/${id}`)
 }
 
+//更新用户状态
+export function updateUserStatus (id, newStatus) {
+  return request.patch(`/api/userList/${id}`, {
+    userStatus: newStatus
+  })
+}
+
 
 
 
