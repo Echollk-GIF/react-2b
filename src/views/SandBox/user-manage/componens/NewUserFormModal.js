@@ -18,6 +18,7 @@ export default function NewUserFormModal (props) {
         title="添加用户"
         okText="确定"
         cancelText="取消"
+        forceRender={true}
         onCancel={() => { setIsAddOpen(false) }}
         onOk={() => {
           form

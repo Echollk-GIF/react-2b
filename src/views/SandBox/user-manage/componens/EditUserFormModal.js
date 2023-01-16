@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Form, Input, Select, Modal } from 'antd'
 import { getUserList } from '../../../../api/user'
 export default function EditUserFormModal (props) {
@@ -10,6 +10,10 @@ export default function EditUserFormModal (props) {
       setDataSource(res)
     })
   }
+  useEffect(() => {
+    form.setFieldsValue({ ...currentEditUser })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentEditUser])
   return (
     <div>
       <Modal
@@ -17,6 +21,7 @@ export default function EditUserFormModal (props) {
         title="编辑用户"
         okText="确定"
         cancelText="取消"
+        forceRender={true}
         onCancel={() => { setIsEditOpen(false) }}
         onOk={() => {
           form
