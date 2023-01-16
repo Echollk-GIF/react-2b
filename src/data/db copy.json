@@ -217,7 +217,7 @@
       "id": 2,
       "role": {
         "id": 2,
-        "roleName": "区域管理员",
+        "roleName": "普通管理员",
         "roleType": 2,
         "rights": [
           "/home",
@@ -252,7 +252,7 @@
       "id": 3,
       "role": {
         "id": 2,
-        "roleName": "区域管理员",
+        "roleName": "普通管理员",
         "roleType": 2,
         "rights": [
           "/home",
@@ -329,7 +329,7 @@
       "id": 5,
       "role": {
         "id": 3,
-        "roleName": "区域编辑",
+        "roleName": "普通编辑",
         "roleType": 3,
         "rights": [
           "/home",
@@ -357,7 +357,7 @@
       "id": 6,
       "role": {
         "id": 3,
-        "roleName": "区域编辑",
+        "roleName": "普通编辑",
         "roleType": 3,
         "rights": [
           "/home",
@@ -385,7 +385,7 @@
       "id": 7,
       "role": {
         "id": 3,
-        "roleName": "区域编辑",
+        "roleName": "普通编辑",
         "roleType": 3,
         "rights": [
           "/home",
@@ -413,7 +413,7 @@
       "id": 8,
       "role": {
         "id": 3,
-        "roleName": "区域编辑",
+        "roleName": "普通编辑",
         "roleType": 3,
         "rights": [
           "/home",
@@ -441,7 +441,7 @@
       "id": 9,
       "role": {
         "id": 3,
-        "roleName": "区域编辑",
+        "roleName": "普通编辑",
         "roleType": 3,
         "rights": [
           "/home",
@@ -469,7 +469,7 @@
       "id": 10,
       "role": {
         "id": 2,
-        "roleName": "区域管理员",
+        "roleName": "普通管理员",
         "roleType": 2,
         "rights": [
           "/home",

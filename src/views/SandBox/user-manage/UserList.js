@@ -142,7 +142,8 @@ export default function UserList () {
         isEditOpen={isEditOpen}
         setIsEditOpen={setIsEditOpen}
         roleSelectList={roleSelectList}
-        currentEditUser={currentEditUser} />
+        currentEditUser={currentEditUser}
+        setDataSource={setDataSource} />
     </div>
   )
 }

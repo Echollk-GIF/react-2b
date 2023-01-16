@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { Form, Input, Select, Modal } from 'antd'
-import { getUserList } from '../../../../api/user'
+import { getUserList, updateUserInfo } from '../../../../api/user'
 export default function EditUserFormModal (props) {
   const [form] = Form.useForm()
   const { currentEditUser, isEditOpen, setIsEditOpen, roleSelectList, setDataSource } = props
   const onEdit = (values) => {
     setIsEditOpen(false)
+    updateUserInfo(currentEditUser.id, values)
     getUserList().then((res) => {
       setDataSource(res)
     })
