@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Input, Select, Modal } from 'antd'
 import { addUser, getUserList } from '../../../../api/user'
-export default function UserFormModal (props) {
+export default function NewUserFormModal (props) {
   const [form] = Form.useForm()
   const { isAddOpen, setIsAddOpen, roleSelectList, setDataSource } = props
   const onCreate = (values) => {
@@ -34,10 +34,7 @@ export default function UserFormModal (props) {
         <Form
           form={form}
           // layout="vertical"
-          name="form_in_modal"
-          initialValues={{
-            modifier: 'public',
-          }}
+          name="addUser"
         >
           <Form.Item
             name="username"

@@ -7,12 +7,20 @@ import {
   updateUserStatus
 } from '../../../api/user'
 import { getRoleSelesctList } from '../../../api/global'
-import UserFormModal from './componens/UserFormModal'
+import NewUserFormModal from './componens/NewUserFormModal'
+import EditUserFormModal from './componens/EditUserFormModal'
 const { confirm } = Modal
 export default function UserList () {
   const [dataSource, setDataSource] = useState([])
   const [isAddOpen, setIsAddOpen] = useState(false)
+  const [isEditOpen, setIsEditOpen] = useState(false)
   const [roleSelectList, setRoleSelectList] = useState([])
+
+  //编辑用户(Modal)
+  const handleEdit = (item) => {
+    setIsEditOpen(true)
+  }
+
   //确认删除(Modal)
   const confirmDelete = (item) => {
     confirm({
@@ -87,7 +95,8 @@ export default function UserList () {
           <Button
             type='primary'
             style={{ marginRight: '20px' }}
-            disabled={item.default}>编辑</Button>
+            disabled={item.default}
+            onClick={() => { handleEdit(item) }}>编辑</Button>
           <Button
             danger
             disabled={item.default}
@@ -123,11 +132,14 @@ export default function UserList () {
           pageSizeOptions: [5, 10],
           defaultPageSize: 5
         }} />
-      <UserFormModal
+      <NewUserFormModal
         isAddOpen={isAddOpen}
         setIsAddOpen={setIsAddOpen}
         roleSelectList={roleSelectList}
         setDataSource={setDataSource} />
+      <EditUserFormModal
+        isEditOpen={isEditOpen}
+        setIsEditOpen={setIsEditOpen} />
     </div>
   )
 }
