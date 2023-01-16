@@ -5,6 +5,7 @@ import {
   MenuUnfoldOutlined,
   UserOutlined
 } from '@ant-design/icons'
+import { useNavigate } from 'react-router-dom'
 const { Header } = Layout
 
 const items = [
@@ -24,10 +25,19 @@ const items = [
 ]
 
 export default function TopHeader (props) {
+  const navigate = useNavigate()
   const { collapsed, setCollapsed } = props
   const {
     token: { colorBgContainer },
   } = theme.useToken()
+
+  //点击DropDown回调
+  const handleMenuClick = (e) => {
+    if (e.key === '2') {
+      localStorage.removeItem('token')
+      navigate('/login')
+    }
+  }
   return (
     <Header
       style={{
@@ -45,6 +55,7 @@ export default function TopHeader (props) {
         <Dropdown
           menu={{
             items,
+            onClick: handleMenuClick
           }}
         >
           <a href='http://www.baidu.com' onClick={(e) => e.preventDefault()}>
