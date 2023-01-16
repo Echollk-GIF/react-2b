@@ -3,8 +3,8 @@ import { Form, Input, Select, Modal } from 'antd'
 import { getUserList } from '../../../../api/user'
 export default function EditUserFormModal (props) {
   const [form] = Form.useForm()
-  const { isEditOpen, setIsEditOpen, roleSelectList, setDataSource } = props
-  const onCreate = (values) => {
+  const { currentEditUser, isEditOpen, setIsEditOpen, roleSelectList, setDataSource } = props
+  const onEdit = (values) => {
     setIsEditOpen(false)
     getUserList().then((res) => {
       setDataSource(res)
@@ -23,7 +23,7 @@ export default function EditUserFormModal (props) {
             .validateFields()
             .then((values) => {
               form.resetFields()
-              onCreate(values)
+              onEdit(values)
             })
             .catch((info) => {
               console.log('Validate Failed:', info)
@@ -33,8 +33,50 @@ export default function EditUserFormModal (props) {
         <Form
           form={form}
           // layout="vertical"
-          name="updateUser"
-        ></Form>
+          name="EditUser"
+          initialValues={{ ...currentEditUser }}
+        >
+          <Form.Item
+            name="username"
+            label="用户名"
+            rules={[
+              {
+                required: true,
+                message: '请输入用户名!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            label="用户名"
+            rules={[
+              {
+                required: true,
+                message: '请输入密码!',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name="roleId"
+            label="角色"
+            rules={[
+              {
+                required: true,
+                message: '请选择角色!',
+              },
+            ]}
+          >
+            <Select>
+              {roleSelectList.map((item) => {
+                return <Select.Option value={item.value} key={item.value}>{item.label}</Select.Option>
+              })}
+            </Select>
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   )

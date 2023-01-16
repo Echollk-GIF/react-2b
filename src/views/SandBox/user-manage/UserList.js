@@ -15,9 +15,10 @@ export default function UserList () {
   const [isAddOpen, setIsAddOpen] = useState(false)
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [roleSelectList, setRoleSelectList] = useState([])
-
+  const [currentEditUser, setCurrentEditUser] = useState({})
   //编辑用户(Modal)
   const handleEdit = (item) => {
+    setCurrentEditUser(item)
     setIsEditOpen(true)
   }
 
@@ -139,7 +140,9 @@ export default function UserList () {
         setDataSource={setDataSource} />
       <EditUserFormModal
         isEditOpen={isEditOpen}
-        setIsEditOpen={setIsEditOpen} />
+        setIsEditOpen={setIsEditOpen}
+        roleSelectList={roleSelectList}
+        currentEditUser={currentEditUser} />
     </div>
   )
 }
