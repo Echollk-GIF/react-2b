@@ -69,6 +69,13 @@ export default function UserList () {
         return role.roleName
       },
       align: 'center',
+      filters: [
+        ...roleSelectList.map((item) => ({
+          text: item.label,
+          value: item.value
+        }))
+      ],
+      onFilter: (value, record) => record.roleId === value
     },
     {
       title: '用户名',
