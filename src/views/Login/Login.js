@@ -1,6 +1,6 @@
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Checkbox, Form, Input } from 'antd'
+import { Button, Checkbox, Form, Input, Card } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
 
@@ -11,7 +11,8 @@ export default function Login () {
   }
   return (
     <div style={{ height: '100vh' }}>
-      <div className='LoginFormContainer'>
+      <Card className='LoginFormContainer'>
+        <div className='LoginFormTitle'>登录</div>
         <Form
           name="normal_login"
           className="login-form"
@@ -63,7 +64,7 @@ export default function Login () {
             Or <Button type='primary' onClick={() => { navigate('/login') }}>现在注册!</Button>
           </Form.Item>
         </Form>
-      </div>
+      </Card>
     </div>
   )
 }

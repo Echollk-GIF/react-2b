@@ -3,8 +3,12 @@
   top: 50%;
   left: 50%;
   width: 500px;
-  height: 300px;
+  height: 400px;
   transform: translate(-50%, -50%);
   padding: 20px;
-  background-color: pink;
+}
+.LoginFormTitle {
+  text-align: center;
+  height: 80px;
+  font-size: 30px;
 }
