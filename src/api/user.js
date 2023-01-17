@@ -204,6 +204,11 @@ export function updateUserInfo (id, newUserInfo) {
   })
 }
 
+//用户登录
+export function userpassLogin (values) {
+  return request.get(`/api/userList?username=${values.username}&password=${values.password}&userStatus=true`)
+}
+
 
 
 

@@ -1,13 +1,22 @@
 import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Checkbox, Form, Input, Card } from 'antd'
+import { Button, Checkbox, Form, Input, Card, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import { userpassLogin } from '../../api/user'
 import './Login.css'
 
 export default function Login () {
   const navigate = useNavigate()
   const onFinish = (values) => {
-    console.log(values)
+    userpassLogin(values).then((res) => {
+      if (res.length === 0) {
+        //登录失败
+        message.error('用户名或密码不匹配')
+      } else {
+        localStorage.setItem('token', 'mockToken')
+        navigate('/')
+      }
+    })
   }
   return (
     <div style={{ height: '100vh' }}>
@@ -22,7 +31,7 @@ export default function Login () {
           onFinish={onFinish}
         >
           <Form.Item
-            name="用户名"
+            name="username"
             rules={[
               {
                 required: true,
@@ -33,7 +42,7 @@ export default function Login () {
             <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
           </Form.Item>
           <Form.Item
-            name="密码"
+            name="password"
             rules={[
               {
                 required: true,
