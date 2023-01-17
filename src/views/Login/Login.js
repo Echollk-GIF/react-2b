@@ -2,14 +2,17 @@ import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Checkbox, Form, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import './Login.css'
+
+
 export default function Login () {
   const navigate = useNavigate()
   const onFinish = (values) => {
-    console.log('Received values of form: ', values)
+    console.log(values)
   }
   return (
     <div style={{ height: '100vh' }}>
-      <div>
+      <div className='LoginformContainer'>
         <Form
           name="normal_login"
           className="login-form"
