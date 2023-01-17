@@ -4,7 +4,6 @@ import { Button, Checkbox, Form, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
 
-
 export default function Login () {
   const navigate = useNavigate()
   const onFinish = (values) => {
@@ -12,7 +11,7 @@ export default function Login () {
   }
   return (
     <div style={{ height: '100vh' }}>
-      <div className='LoginformContainer'>
+      <div className='LoginFormContainer'>
         <Form
           name="normal_login"
           className="login-form"
