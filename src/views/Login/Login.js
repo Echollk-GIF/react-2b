@@ -14,6 +14,7 @@ export default function Login () {
         message.error('用户名或密码不匹配')
       } else {
         localStorage.setItem('token', 'mockToken')
+        localStorage.setItem('userInfo', JSON.stringify(res[0]))
         navigate('/')
       }
     })
