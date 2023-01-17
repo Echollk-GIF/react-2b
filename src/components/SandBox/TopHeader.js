@@ -8,12 +8,14 @@ import {
 import { useNavigate } from 'react-router-dom'
 const { Header } = Layout
 
+const { role: { roleName }, username } = JSON.parse(localStorage.getItem('userInfo'))
+
 const items = [
   {
     key: '1',
     label: (
       <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-        超级管理员
+        {roleName}
       </a>
     ),
   },
@@ -35,6 +37,7 @@ export default function TopHeader (props) {
   const handleMenuClick = (e) => {
     if (e.key === '2') {
       localStorage.removeItem('token')
+      localStorage.removeItem('userInfo')
       navigate('/login')
     }
   }
@@ -51,7 +54,7 @@ export default function TopHeader (props) {
           : <MenuFoldOutlined onClick={() => { setCollapsed(!collapsed) }} />
       }
       <div style={{ float: 'right' }}>
-        <span>欢迎admin回来</span>
+        <span>欢迎{username}回来</span>
         <Dropdown
           menu={{
             items,

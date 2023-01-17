@@ -24,6 +24,8 @@ export default function SideMenu (props) {
   const openKeys = ["/" + location.pathname.split("/")[1]]
   const [menu, setMenu] = useState([])
 
+  const { role: { rights } } = JSON.parse(localStorage.getItem('userInfo'))
+
   const [iconList] = useState({
     "/home": <HomeOutlined />,
     "/user-manage": <UserOutlined />,
@@ -35,16 +37,25 @@ export default function SideMenu (props) {
 
   const createSideMenu = (menuList) => {
     return menuList.map((item) => {
+      //检查默认所有路由该级节点是否有权限
+      if (item.pagepermission === undefined || (item.pagepermission && item.pagepermission !== 1)) {
+        return null
+      }
+      //检查当前账户角色权限是否有权限
+      if (!rights.includes(item.key)) {
+        return null
+      }
+
       item.icon = iconList[item.key]
       item.label = item.title
       // 移除空children节点
       if (item.children && item.children.length === 0) {
         delete item["children"]
       }
-      // 移除无pagepermission权限节点
+      // 移除无pagepermission权限子节点
       if (item.children !== undefined) {
         for (let i = 0; i < item.children.length; i++) {
-          if (item.children[i].pagepermission === undefined || item.children[i].pagepermission !== 1) {
+          if (item.children[i].pagepermission === undefined || (item.children[i].pagepermission && item.children[i].pagepermission !== 1) || !rights.includes(item.children[i].key)) {
             delete item.children[i]
           }
         }
