@@ -9,7 +9,7 @@ export default function Login () {
   }
   return (
     <div style={{ height: '100vh' }}>
-      <div className='formContainer'>
+      <div>
         <Form
           name="normal_login"
           className="login-form"
