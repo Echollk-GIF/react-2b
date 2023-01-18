@@ -7,6 +7,7 @@ import RoleList from '../views/SandBox/right-manage/role/RoleList'
 import RightList from '../views/SandBox/right-manage/right/RightList'
 import NoPermission from '../views/SandBox/noPermission/NoPermission'
 import { getPermissionList } from '../api/right'
+
 const LocalRouterMap = {
   "/home": <Home />,
   "/user-manage/list": <UserList />,
@@ -23,6 +24,16 @@ const LocalRouterMap = {
 }
 export default function UserRouter () {
   const [backRouteList, setbackRouteList] = useState([])
+
+  const checkRoute = (item) => {
+    return LocalRouterMap[item.key] && (item.pagepermission || item.routepermisson)
+  }
+
+  const { role: { rights } } = JSON.parse(localStorage.getItem("userInfo"))
+
+  const checkUserPermission = (item) => {
+    return rights.includes(item.key)
+  }
   useEffect(() => {
     getPermissionList().then((res) => {
       let tempArray = []
@@ -46,13 +57,19 @@ export default function UserRouter () {
         <Route path="right-manage/right/list" element={<RightList />} /> */}
 
         {
-          backRouteList.map((item) => (
-            <Route
-              path={item.key}
-              key={item.key}
-              element={LocalRouterMap[item.key]}
-            />
-          ))
+          backRouteList.map((item) => {
+            if (checkRoute(item) && checkUserPermission(item)) {
+              return (
+                <Route
+                  path={item.key}
+                  key={item.key}
+                  element={LocalRouterMap[item.key]}
+                />
+              )
+            } else {
+              return null
+            }
+          })
         }
 
         <Route path="/" element={<Navigate replace from="/" to="home" />} />
