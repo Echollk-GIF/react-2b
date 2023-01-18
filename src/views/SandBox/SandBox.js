@@ -1,13 +1,7 @@
 import React, { useState } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-
+import UserRouter from '../../router/UserRouter'
 import TopHeader from '../../components/SandBox/TopHeader'
 import SideMenu from '../../components/SandBox/SideMenu'
-import Home from './home/Home'
-import UserList from './user-manage/UserList'
-import RoleList from './right-manage/role/RoleList'
-import RightList from './right-manage/right/RightList'
-import NoPermission from './noPermission/NoPermission'
 
 import './SandBox.css'
 
@@ -32,14 +26,7 @@ export default function SandBox () {
             overflow: 'auto'
           }}
         >
-          <Routes>
-            <Route path="home" element={<Home />} />
-            <Route path="user-manage/list" element={<UserList />} />
-            <Route path="right-manage/role/list" element={<RoleList />} />
-            <Route path="right-manage/right/list" element={<RightList />} />
-            <Route path="/" element={<Navigate replace from="/" to="home" />} />
-            <Route path="/*" element={<NoPermission />} />
-          </Routes>
+          <UserRouter />
         </Content>
       </Layout>
 
